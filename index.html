@@ -3,34 +3,1271 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saha Dolabı &amp; Devre Takip</title>
+  <title>TA1DP • Mobil Uygulamalar — Serdar Tunçel</title>
+  <meta name="description" content="TA1DP (Serdar Tunçel) tarafından geliştirilen mobil uygulamalar: Sakin Döngü: Yumurtlama Takibi ve Saha Dolabı &amp; Devre Takip. Detaylar ve gizlilik politikaları." />
+  <link rel="canonical" href="https://ta1dp.github.io/" />
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; background: #0f172a; color: #f8fafc; line-height: 1.6; }
-    .wrap { max-width: 780px; margin: 48px auto; padding: 0 20px; }
-    .card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 28px; box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
-    h1 { margin: 0 0 8px; font-size: 26px; color: #ffffff; }
-    .badge { display: inline-block; background: rgba(239,68,68,0.18); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
-    p, li { color: #cbd5e1; }
-    a.btn { display: inline-block; margin-top: 14px; padding: 10px 18px; background: #38bdf8; color: #0f172a; text-decoration: none; font-weight: 700; border-radius: 10px; }
-    .muted { font-size: 13px; color: #94a3b8; margin-top: 20px; }
+    :root {
+      --bg-canvas: #FAFAF8;
+      --bg-card: #FFFFFF;
+      --bg-muted: #F4F6F5;
+      --border-subtle: #E8ECEA;
+      --border-strong: #D5DDD9;
+
+      --text-primary: #1E292B;
+      --text-secondary: #52606D;
+      --text-muted: #7B8794;
+
+      /* Sakin Döngü — Botanik Adaçayı */
+      --sage-accent: #4B7A66;
+      --sage-dark: #2E5243;
+      --sage-soft: #EBF3EE;
+      --sage-border: #CFE0D6;
+
+      /* Saha Dolabı — Teknik Arduvaz / Mavi */
+      --sky-accent: #0284C7;
+      --sky-dark: #0369A1;
+      --sky-soft: #E0F2FE;
+      --sky-border: #BAE6FD;
+
+      /* Nötr Uyarı / Bilgi */
+      --amber-soft: #FEF7EC;
+      --amber-border: #F5DEC0;
+      --amber-dark: #6D4C1D;
+
+      --shadow-card: 0 2px 10px rgba(30, 41, 43, 0.04);
+      --shadow-card-hover: 0 10px 28px rgba(30, 41, 43, 0.08);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --focus-ring: 0 0 0 3px rgba(75, 122, 102, 0.25);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    :focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    .topbar {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .topbar-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--bg-muted);
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--text-primary);
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.02rem;
+      letter-spacing: -0.015em;
+      display: block;
+      line-height: 1.25;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      display: block;
+    }
+
+    .topbar-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .top-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .top-pill:hover {
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+      background: var(--bg-muted);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 36px 20px 56px;
+      flex: 1;
+    }
+
+    .view[hidden] {
+      display: none !important;
+    }
+
+    .hero {
+      margin-bottom: 30px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.65rem, 3.2vw, 2.2rem);
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 68ch;
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .project-card--sage:hover {
+      border-color: var(--sage-border);
+    }
+
+    .project-card--sky:hover {
+      border-color: var(--sky-border);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .app-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .app-icon--sage {
+      background: var(--sage-soft);
+      border: 1px solid var(--sage-border);
+      color: var(--sage-accent);
+    }
+
+    .app-icon--sky {
+      background: var(--sky-soft);
+      border: 1px solid var(--sky-border);
+      color: var(--sky-accent);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      line-height: 1.3;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-muted);
+      color: var(--text-secondary);
+    }
+
+    .badge--sage {
+      background: var(--sage-soft);
+      border-color: var(--sage-border);
+      color: var(--sage-dark);
+    }
+
+    .badge--sky {
+      background: var(--sky-soft);
+      border-color: var(--sky-border);
+      color: var(--sky-dark);
+    }
+
+    .badge--status {
+      background: var(--bg-card);
+      border-color: var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    .card-title-wrap h2 {
+      margin: 0 0 6px;
+      font-size: 1.3rem;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .pkg-code {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--bg-muted);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      word-break: break-all;
+    }
+
+    .card-summary {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    .card-highlights {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .card-highlights li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 0.89rem;
+      color: var(--text-primary);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .dot--sage {
+      background: var(--sage-accent);
+    }
+
+    .dot--sky {
+      background: var(--sky-accent);
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.99);
+    }
+
+    .btn-primary--sage {
+      background: var(--sage-accent);
+      color: #FFFFFF;
+    }
+
+    .btn-primary--sage:hover {
+      background: var(--sage-dark);
+    }
+
+    .btn-primary--sky {
+      background: var(--sky-accent);
+      color: #FFFFFF;
+    }
+
+    .btn-primary--sky:hover {
+      background: var(--sky-dark);
+    }
+
+    .btn-ghost {
+      background: var(--bg-card);
+      border-color: var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg-muted);
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+
+    .meta-strip {
+      margin-top: 26px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .meta-strip-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .meta-strip-text strong {
+      color: var(--text-primary);
+    }
+
+    .meta-strip-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .detail-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--bg-muted);
+      border-color: var(--border-strong);
+    }
+
+    .detail-switcher {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-hero {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 20px;
+    }
+
+    .detail-hero--sage {
+      border-top: 4px solid var(--sage-accent);
+    }
+
+    .detail-hero--sky {
+      border-top: 4px solid var(--sky-accent);
+    }
+
+    .detail-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .detail-title-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .detail-title-group h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.45rem, 2.8vw, 1.9rem);
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+    }
+
+    .detail-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .detail-summary {
+      margin: 0 0 20px;
+      font-size: 1.03rem;
+      color: var(--text-secondary);
+      max-width: 74ch;
+    }
+
+    .detail-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .detail-columns {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .panel h2 {
+      margin: 0 0 16px;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .feature-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      background: var(--bg-canvas);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.93rem;
+      color: var(--text-primary);
+    }
+
+    .feature-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .feature-check--sage {
+      background: var(--sage-soft);
+      color: var(--sage-dark);
+    }
+
+    .feature-check--sky {
+      background: var(--sky-soft);
+      color: var(--sky-dark);
+    }
+
+    .privacy-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .privacy-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .privacy-list li {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .privacy-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border-strong);
+    }
+
+    .privacy-list--sage li::before {
+      background: var(--sage-accent);
+    }
+
+    .privacy-list--sky li::before {
+      background: var(--sky-accent);
+    }
+
+    .notice-box {
+      padding: 13px 15px;
+      border-radius: var(--radius-md);
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-border);
+      color: var(--amber-dark);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .perm-block {
+      padding-top: 14px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .perm-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 9px;
+    }
+
+    .perm-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .perm-tag {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.77rem;
+      padding: 4px 9px;
+      border-radius: 6px;
+      background: var(--bg-muted);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    .policy-callout {
+      margin-top: 6px;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-canvas);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .policy-callout--sage {
+      background: var(--sage-soft);
+      border-color: var(--sage-border);
+    }
+
+    .policy-callout--sky {
+      background: var(--sky-soft);
+      border-color: var(--sky-border);
+    }
+
+    .policy-callout p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 22px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 860px) {
+      .projects-grid,
+      .detail-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 24px 16px 40px;
+      }
+
+      .project-card,
+      .detail-hero,
+      .panel {
+        padding: 20px;
+      }
+
+      .card-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .card-actions .btn {
+        width: 100%;
+      }
+
+      .detail-cta-row .btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <div class="badge">TA1DP • Mobil Saha Çözümleri</div>
-      <h1>Saha Dolabı &amp; Devre Takip</h1>
-      <p>Telekomünikasyon saha ekipleri için geliştirilen konum tabanlı saha dolabı (SD), lokal kutu, sökük devre matrisi ve 10 gün karantina takip uygulaması.</p>
-      <ul>
-        <li>Canlı GPS konumu, harita ve aç/kapa çevrimdışı harita önbelleği</li>
-        <li>Sökülen devreler için otomatik 10 günlük karantina koruması</li>
-        <li>Arızalı reglet işaretleme, teknik kapasite notları ve dolap fotoğrafı ekleme</li>
-        <li>Türkiye 10'luk bakır reglet ve fiber (TIA-598 / TRFO-8) renk kodu hesaplayıcı</li>
-        <li>Haftalık otomatik yerel yedek (.json) ve seçmeli gizlilik korumalı (.sahadolabi) paylaşım</li>
-      </ul>
-      <a class="btn" href="privacy-policy.html">Gizlilik Politikası</a>
-      <p class="muted">Paket Adı: <code>com.serdartncl.sahadolabitakip</code> • <a href="app-ads.txt" style="color:#94a3b8;">app-ads.txt</a></p>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#" class="brand" id="brandHomeLink" aria-label="TA1DP Ana Sayfa">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+          </svg>
+        </span>
+        <span>
+          <span class="brand-title">TA1DP • Mobil Uygulamalar</span>
+          <span class="brand-sub">Geliştirici: Serdar Tunçel</span>
+        </span>
+      </a>
+
+      <nav class="topbar-links" aria-label="Geliştirici bağlantıları">
+        <a class="top-pill" href="mailto:sertunreklam1@gmail.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </svg>
+          sertunreklam1@gmail.com
+        </a>
+        <a class="top-pill" href="https://ta1dp.github.io/app-ads.txt" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          app-ads.txt
+        </a>
+      </nav>
     </div>
-  </div>
+  </header>
+
+  <main class="container">
+    <section id="homeView" class="view" aria-label="Mobil Uygulamalar Listesi">
+      <div class="hero">
+        <span class="hero-eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Cihaz İçi Odaklı • Şeffaf Gizlilik Politikaları
+        </span>
+        <h1>Android Uygulamalar &amp; Gizlilik Merkezi</h1>
+        <p>
+          Serdar Tunçel (TA1DP) tarafından geliştirilen mobil uygulamaların teknik özetlerini,
+          cihaz içi veri güvenliği yaklaşımlarını ve resmi gizlilik politikalarını aşağıdan inceleyebilirsiniz.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card project-card--sage" data-project="sakin-dongu" tabindex="0" role="region" aria-labelledby="card-title-sakin">
+          <div class="card-top">
+            <span class="app-icon app-icon--sage" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21c4.5-3.5 7-7.4 7-11.2A7 7 0 0 0 5 9.8C5 13.6 7.5 17.5 12 21Z"></path>
+                <path d="M12 13V7"></path>
+                <path d="M9.5 9.5 12 7l2.5 2.5"></path>
+              </svg>
+            </span>
+            <div class="badge-row">
+              <span class="badge badge--sage">Sağlık ve Fitness</span>
+              <span class="badge">18+ Yetişkin</span>
+              <span class="badge badge--status">Google Play Hazırlık / Yayın Sürecinde</span>
+            </div>
+          </div>
+
+          <div class="card-title-wrap">
+            <h2 id="card-title-sakin">Sakin Döngü: Yumurtlama Takibi</h2>
+            <code class="pkg-code">com.sakindongu.app</code>
+          </div>
+
+          <p class="card-summary">
+            Bilimsel semptotermal yumurtlama takibi. PKOS dostu, %100 cihaz içi ve şifreli.
+          </p>
+
+          <ul class="card-highlights">
+            <li>
+              <span class="dot dot--sage" aria-hidden="true"></span>
+              <span>BBT ısı kayması (3'ü 6 üzerinde kuralı), servikal mukus ve LH ovülasyon şeridi sentezi</span>
+            </li>
+            <li>
+              <span class="dot dot--sage" aria-hidden="true"></span>
+              <span>Hesap veya bulut sunucusu yok; SQLite + PIN/Biyometrik kilit + AES-256-GCM yedek</span>
+            </li>
+            <li>
+              <span class="dot dot--sage" aria-hidden="true"></span>
+              <span>Yalnızca kişiselleştirilmemiş reklamlar (<code>npa=1</code>); Dinlenme/Kayıp Modu ile tek tıkla kapatma</span>
+            </li>
+          </ul>
+
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary--sage" data-open-detail="sakin-dongu">
+              Detayları &amp; Politikayı Gör →
+            </button>
+            <a class="btn btn-ghost" href="sakin-dongu-privacy.html" data-direct-policy>
+              Gizlilik Politikası
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card project-card--sky" data-project="saha-dolabi" tabindex="0" role="region" aria-labelledby="card-title-saha">
+          <div class="card-top">
+            <span class="app-icon app-icon--sky" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="3" width="16" height="18" rx="2"></rect>
+                <line x1="8" y1="8" x2="16" y2="8"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+                <circle cx="15" cy="16" r="1"></circle>
+              </svg>
+            </span>
+            <div class="badge-row">
+              <span class="badge badge--sky">Araçlar</span>
+              <span class="badge badge--status">Kapalı Test (Google Play)</span>
+            </div>
+          </div>
+
+          <div class="card-title-wrap">
+            <h2 id="card-title-saha">Saha Dolabı &amp; Devre Takip</h2>
+            <code class="pkg-code">com.serdartncl.sahadolabitakip</code>
+          </div>
+
+          <p class="card-summary">
+            Telekomünikasyon saha ekipleri için konum tabanlı saha dolabı (SD), lokal kutu, arızalı reglet, renk kodu ve 10 gün karantina takip aracı.
+          </p>
+
+          <ul class="card-highlights">
+            <li>
+              <span class="dot dot--sky" aria-hidden="true"></span>
+              <span>Canlı GPS, harita üzerinde SD/lokal yönetimi ve aç/kapa çevrimdışı harita önbelleği</span>
+            </li>
+            <li>
+              <span class="dot dot--sky" aria-hidden="true"></span>
+              <span>Sökülen devreler için otomatik 10 günlük karantina koruması ve çevrimdışı renk kodu hesaplayıcı</span>
+            </li>
+            <li>
+              <span class="dot dot--sky" aria-hidden="true"></span>
+              <span>Konum, fotoğraf ve yedekler yalnızca cihaz içi yerel <code>IndexedDB</code>'de saklanır</span>
+            </li>
+          </ul>
+
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary--sky" data-open-detail="saha-dolabi">
+              Detayları &amp; Politikayı Gör →
+            </button>
+            <a class="btn btn-ghost" href="privacy-policy.html" data-direct-policy>
+              Gizlilik Politikası
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <aside class="meta-strip" aria-label="Geliştirici ve doğrulama bilgileri">
+        <div class="meta-strip-text">
+          <strong>Geliştirici Doğrulama &amp; İletişim:</strong>
+          Gizlilik talepleri ve uygulama desteği için <a href="mailto:sertunreklam1@gmail.com">sertunreklam1@gmail.com</a> adresine ulaşabilirsiniz.
+        </div>
+        <div class="meta-strip-actions">
+          <a class="btn btn-ghost" href="https://ta1dp.github.io/app-ads.txt" target="_blank" rel="noopener noreferrer">
+            app-ads.txt Görüntüle
+          </a>
+        </div>
+      </aside>
+    </section>
+
+    <section id="detailView" class="view" hidden aria-live="polite"></section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© TA1DP • Mobil Uygulamalar — Geliştirici: Serdar Tunçel</span>
+      <div class="footer-links">
+        <a href="sakin-dongu-privacy.html">Sakin Döngü Gizlilik Politikası</a>
+        <a href="privacy-policy.html">Saha Dolabı Gizlilik Politikası</a>
+        <a href="https://ta1dp.github.io/app-ads.txt" target="_blank" rel="noopener noreferrer">app-ads.txt</a>
+        <a href="mailto:sertunreklam1@gmail.com">sertunreklam1@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var PROJECTS = {
+        "sakin-dongu": {
+          id: "sakin-dongu",
+          theme: "sage",
+          title: "Sakin Döngü: Yumurtlama Takibi",
+          packageName: "com.sakindongu.app",
+          category: "Sağlık ve Fitness",
+          ageRating: "18+ Yetişkin",
+          status: "Google Play Hazırlık / Yayın Sürecinde",
+          summary: "Bilimsel semptotermal yumurtlama takibi. PKOS dostu, %100 cihaz içi ve şifreli.",
+          policyUrl: "sakin-dongu-privacy.html",
+          policyLabel: "Tam Gizlilik Politikasını Oku",
+          otherProjectId: "saha-dolabi",
+          otherProjectLabel: "Saha Dolabı & Devre Takip",
+          features: [
+            "Semptotermal Yöntem (BBT ısı kayması 3'ü 6 üzerinde kuralı, servikal mukus ve LH ovülasyon şeridi sentezi)",
+            "PKOS ve Düzensiz Döngü Dostu (yanıltıcı sabit 28 gün tahmini yerine gerçek biyolojik sinyaller)",
+            "Birleşik Bugün Komuta Merkezi, 0–100 Döngü Veri Netliği Halkası ve Haftalık Özet",
+            "Folik Asit (90 günlük hazırlık) ve Çoklu Takviye Takibi + 16 maddelik kaynakçalı SSS Rehberi",
+            "Tek Tıkla Dinlenme ve Kayıp Modu (tüm bildirimler ve reklamlar anında kapatılır)",
+            "%100 Cihaz İçi SQLite + PIN/Biyometrik Kilit + AES-256-GCM şifreli yerel yedek (.sakinbackup) ve Doktor PDF Raporu"
+          ],
+          privacyPoints: [
+            "Hesap veya bulut sunucusu yoktur; tüm döngü ve üreme sağlığı verileri yalnızca cihazda tutulur.",
+            "Yalnızca Google AdMob Kişiselleştirilmemiş Reklamlar (npa=1) kullanılır; sağlık verisi reklam ağına aktarılmaz."
+          ],
+          importantNotice: "Tıbbi cihaz (SaMD) değildir; tanı, tedavi veya doğum kontrolü amacıyla kullanılamaz.",
+          permissions: [
+            "INTERNET",
+            "ACCESS_NETWORK_STATE",
+            "POST_NOTIFICATIONS",
+            "RECEIVE_BOOT_COMPLETED",
+            "USE_BIOMETRIC"
+          ]
+        },
+        "saha-dolabi": {
+          id: "saha-dolabi",
+          theme: "sky",
+          title: "Saha Dolabı & Devre Takip",
+          packageName: "com.serdartncl.sahadolabitakip",
+          category: "Araçlar",
+          ageRating: null,
+          status: "Kapalı Test (Google Play)",
+          summary: "Telekomünikasyon saha ekipleri için konum tabanlı saha dolabı (SD), lokal kutu, arızalı reglet, renk kodu ve 10 gün karantina takip aracı.",
+          policyUrl: "privacy-policy.html",
+          policyLabel: "Tam Gizlilik Politikasını Oku",
+          otherProjectId: "sakin-dongu",
+          otherProjectLabel: "Sakin Döngü: Yumurtlama Takibi",
+          features: [
+            "Canlı GPS konumu, harita üzerinde saha dolabı/lokal yönetimi ve aç/kapa çevrimdışı harita önbelleği",
+            "Sökülen devreler için otomatik 10 günlük karantina koruması ve süre dolmadan uyarı",
+            "Arızalı/oksitli reglet işaretleme, sebep etiketleri ve devrelere mini teknik kapasite notları",
+            "Dolap & ankastre fotoğrafı ekleme (cihaz içi kanıt arşivi)",
+            "Çevrimdışı Türkiye 10'luk Bakır Reglet & Fiber Optik (TIA-598 / Türk Telekom TRFO-8) renk kodu hesaplayıcı",
+            "Haftalık otomatik yerel .json yedeği ve yalnızca seçili dolap/lokal/arıza notlarını paylaşan gizlilik korumalı .sahadolabi paylaşımı (sökük devreler paylaşılmaz)"
+          ],
+          privacyPoints: [
+            "Konum (ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION), fotoğraflar, harita önbelleği ve yedekler yalnızca cihaz içi yerel IndexedDB'de tutulur; geliştirici sunucusuna aktarılmaz.",
+            "Google AdMob reklam SDK'sı reklam sunumu ve ölçüm için kullanılır; ayarlar içinden 3 adımlı onayla tüm veriler silinebilir."
+          ],
+          importantNotice: "Gizlilik korumalı .sahadolabi paylaşımında yalnızca seçili dolap, lokal ve arıza notları aktarılır; sökük devreler paylaşılmaz.",
+          permissions: [
+            "ACCESS_FINE_LOCATION",
+            "ACCESS_COARSE_LOCATION"
+          ]
+        }
+      };
+
+      var homeView = document.getElementById("homeView");
+      var detailView = document.getElementById("detailView");
+      var brandHomeLink = document.getElementById("brandHomeLink");
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function iconSvg(projectId) {
+        if (projectId === "sakin-dongu") {
+          return '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+            '<path d="M12 21c4.5-3.5 7-7.4 7-11.2A7 7 0 0 0 5 9.8C5 13.6 7.5 17.5 12 21Z"></path>' +
+            '<path d="M12 13V7"></path>' +
+            '<path d="M9.5 9.5 12 7l2.5 2.5"></path>' +
+            '</svg>';
+        }
+        return '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+          '<rect x="4" y="3" width="16" height="18" rx="2"></rect>' +
+          '<line x1="8" y1="8" x2="16" y2="8"></line>' +
+          '<line x1="8" y1="12" x2="16" y2="12"></line>' +
+          '<circle cx="15" cy="16" r="1"></circle>' +
+          '</svg>';
+      }
+
+      function renderDetail(project) {
+        var t = project.theme;
+        var badgesHtml = '<span class="badge badge--' + t + '">' + escapeHtml(project.category) + '</span>';
+        if (project.ageRating) {
+          badgesHtml += '<span class="badge">' + escapeHtml(project.ageRating) + '</span>';
+        }
+        badgesHtml += '<span class="badge badge--status">' + escapeHtml(project.status) + '</span>';
+
+        var featuresHtml = project.features.map(function (item) {
+          return '<li class="feature-item">' +
+            '<span class="feature-check feature-check--' + t + '" aria-hidden="true">' +
+              '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' +
+            '</span>' +
+            '<span>' + escapeHtml(item) + '</span>' +
+          '</li>';
+        }).join("");
+
+        var privacyHtml = project.privacyPoints.map(function (point) {
+          return '<li>' + escapeHtml(point) + '</li>';
+        }).join("");
+
+        var permsHtml = project.permissions.map(function (perm) {
+          return '<code class="perm-tag">' + escapeHtml(perm) + '</code>';
+        }).join("");
+
+        detailView.innerHTML =
+          '<div class="detail-nav">' +
+            '<button type="button" class="back-btn" id="backToAllBtn">' +
+              '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>' +
+              'Tüm Projelere Dön' +
+            '</button>' +
+            '<div class="detail-switcher">' +
+              '<a class="btn btn-ghost" href="#' + escapeHtml(project.otherProjectId) + '" data-switch-project="' + escapeHtml(project.otherProjectId) + '">' +
+                'Diğer Proje: ' + escapeHtml(project.otherProjectLabel) +
+              '</a>' +
+            '</div>' +
+          '</div>' +
+
+          '<section class="detail-hero detail-hero--' + t + '">' +
+            '<div class="detail-header">' +
+              '<div class="detail-title-group">' +
+                '<span class="app-icon app-icon--' + t + '">' + iconSvg(project.id) + '</span>' +
+                '<div>' +
+                  '<h1>' + escapeHtml(project.title) + '</h1>' +
+                  '<code class="pkg-code">' + escapeHtml(project.packageName) + '</code>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+
+            '<div class="detail-badges">' + badgesHtml + '</div>' +
+            '<p class="detail-summary">' + escapeHtml(project.summary) + '</p>' +
+
+            '<div class="detail-cta-row">' +
+              '<a class="btn btn-primary--' + t + '" href="' + escapeHtml(project.policyUrl) + '">' +
+                escapeHtml(project.policyLabel) + ' →' +
+              '</a>' +
+              '<a class="btn btn-ghost" href="mailto:sertunreklam1@gmail.com?subject=' + encodeURIComponent(project.title + " — Destek / Gizlilik") + '">' +
+                'Geliştiriciyle İletişim' +
+              '</a>' +
+            '</div>' +
+          '</section>' +
+
+          '<div class="detail-columns">' +
+            '<section class="panel" aria-labelledby="features-heading">' +
+              '<h2 id="features-heading">' +
+                '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>' +
+                'Öne Çıkan Özellikler' +
+              '</h2>' +
+              '<ul class="feature-list">' + featuresHtml + '</ul>' +
+            '</section>' +
+
+            '<section class="panel" aria-labelledby="privacy-heading">' +
+              '<h2 id="privacy-heading">' +
+                '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' +
+                'Gizlilik &amp; Politika Özeti' +
+              '</h2>' +
+              '<div class="privacy-stack">' +
+                '<ul class="privacy-list privacy-list--' + t + '">' + privacyHtml + '</ul>' +
+
+                '<div class="notice-box">' +
+                  '<strong>Önemli Kullanım Notu:</strong> ' + escapeHtml(project.importantNotice) +
+                '</div>' +
+
+                '<div class="perm-block">' +
+                  '<span class="perm-label">Beyan Edilen Uygulama İzinleri</span>' +
+                  '<div class="perm-tags">' + permsHtml + '</div>' +
+                '</div>' +
+
+                '<div class="policy-callout policy-callout--' + t + '">' +
+                  '<p>Veri işleme kapsamı, reklam politikası ve kullanıcı haklarının tamamı için resmi politika belgesini açabilirsiniz.</p>' +
+                  '<a class="btn btn-primary--' + t + '" href="' + escapeHtml(project.policyUrl) + '">' +
+                    'Tam Gizlilik Politikası (' + escapeHtml(project.policyUrl) + ') →' +
+                  '</a>' +
+                '</div>' +
+              '</div>' +
+            '</section>' +
+          '</div>';
+
+        document.getElementById("backToAllBtn").addEventListener("click", function () {
+          navigateHome(true);
+        });
+      }
+
+      function showProject(projectId, updateHash) {
+        var project = PROJECTS[projectId];
+        if (!project) {
+          showHome(false);
+          return;
+        }
+        renderDetail(project);
+        homeView.hidden = true;
+        detailView.hidden = false;
+        document.title = project.title + " — TA1DP • Mobil Uygulamalar";
+
+        if (updateHash && window.location.hash !== "#" + projectId) {
+          try {
+            history.pushState({ projectId: projectId }, "", "#" + projectId);
+          } catch (err) {
+            window.location.hash = projectId;
+          }
+        }
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+
+      function showHome(updateHash) {
+        detailView.hidden = true;
+        detailView.innerHTML = "";
+        homeView.hidden = false;
+        document.title = "TA1DP • Mobil Uygulamalar — Serdar Tunçel";
+
+        if (updateHash && window.location.hash) {
+          try {
+            history.pushState({}, "", window.location.pathname + window.location.search);
+          } catch (err) {
+            window.location.hash = "";
+          }
+        }
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+
+      function navigateHome(updateHash) {
+        showHome(updateHash);
+      }
+
+      function syncFromHash() {
+        var hash = (window.location.hash || "").replace(/^#/, "");
+        if (PROJECTS[hash]) {
+          showProject(hash, false);
+        } else {
+          showHome(false);
+        }
+      }
+
+      document.querySelectorAll(".project-card").forEach(function (card) {
+        var projectId = card.getAttribute("data-project");
+
+        card.addEventListener("click", function (event) {
+          if (event.target.closest("[data-direct-policy]")) {
+            return;
+          }
+          showProject(projectId, true);
+        });
+
+        card.addEventListener("keydown", function (event) {
+          if (event.target !== card) {
+            return;
+          }
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            showProject(projectId, true);
+          }
+        });
+      });
+
+      document.querySelectorAll("[data-open-detail]").forEach(function (btn) {
+        btn.addEventListener("click", function (event) {
+          event.stopPropagation();
+          showProject(btn.getAttribute("data-open-detail"), true);
+        });
+      });
+
+      brandHomeLink.addEventListener("click", function (event) {
+        event.preventDefault();
+        navigateHome(true);
+      });
+
+      window.addEventListener("hashchange", syncFromHash);
+      window.addEventListener("popstate", syncFromHash);
+      syncFromHash();
+    })();
+  </script>
 </body>
 </html>
