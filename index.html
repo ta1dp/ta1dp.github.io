@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TA1DP • Mobil Uygulamalar — Serdar Tunçel</title>
-  <meta name="description" content="TA1DP (Serdar Tunçel) tarafından geliştirilen mobil uygulamalar: Sakin Döngü: Yumurtlama Takibi ve Saha Dolabı &amp; Devre Takip. Detaylar ve gizlilik politikaları." />
+  <meta name="description" content="TA1DP (Serdar Tunçel) tarafından geliştirilen mobil uygulamalar: Sakin Döngü: Yumurtlama Takibi, Saha Dolabı &amp; Devre Takip ve CW Master: Mors Ustası. Detaylar ve gizlilik politikaları." />
   <link rel="canonical" href="https://ta1dp.github.io/" />
   <style>
     :root {
@@ -29,6 +29,12 @@
       --sky-dark: #0369A1;
       --sky-soft: #E0F2FE;
       --sky-border: #BAE6FD;
+
+      /* CW Master — Mors Ustası (Kehribar / SDR) */
+      --cw-accent: #D97706;
+      --cw-dark: #92400E;
+      --cw-soft: #FEF3C7;
+      --cw-border: #FDE68A;
 
       /* Nötr Uyarı / Bilgi */
       --amber-soft: #FEF7EC;
@@ -76,6 +82,7 @@
       box-shadow: var(--focus-ring);
     }
 
+    /* Topbar */
     .topbar {
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(8px);
@@ -159,6 +166,7 @@
       background: var(--bg-muted);
     }
 
+    /* Main Container */
     .container {
       width: 100%;
       max-width: 1040px;
@@ -167,10 +175,12 @@
       flex: 1;
     }
 
+    /* Views */
     .view[hidden] {
       display: none !important;
     }
 
+    /* Hero */
     .hero {
       margin-bottom: 30px;
     }
@@ -204,9 +214,10 @@
       font-size: 1rem;
     }
 
+    /* Project Grid */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 22px;
       align-items: stretch;
     }
@@ -427,6 +438,7 @@
       color: var(--text-primary);
     }
 
+    /* Info Strip below grid */
     .meta-strip {
       margin-top: 26px;
       background: var(--bg-card);
@@ -455,6 +467,7 @@
       flex-wrap: wrap;
     }
 
+    /* Detail View */
     .detail-nav {
       display: flex;
       align-items: center;
@@ -715,6 +728,17 @@
       border-color: var(--sage-border);
     }
 
+    .project-card--cw:hover { border-color: var(--cw-border); }
+    .app-icon--cw { background: var(--cw-soft); border: 1px solid var(--cw-border); color: var(--cw-accent); }
+    .badge--cw { background: var(--cw-soft); border-color: var(--cw-border); color: var(--cw-dark); }
+    .dot--cw { background: var(--cw-accent); }
+    .btn-primary--cw { background: var(--cw-accent); color: #FFFFFF; }
+    .btn-primary--cw:hover { background: var(--cw-dark); }
+    .detail-hero--cw { border-top: 4px solid var(--cw-accent); }
+    .feature-check--cw { background: var(--cw-soft); color: var(--cw-dark); }
+    .privacy-list--cw li::before { background: var(--cw-accent); }
+    .policy-callout--cw { background: var(--cw-soft); border-color: var(--cw-border); }
+
     .policy-callout--sky {
       background: var(--sky-soft);
       border-color: var(--sky-border);
@@ -726,6 +750,7 @@
       color: var(--text-primary);
     }
 
+    /* Footer */
     .footer {
       border-top: 1px solid var(--border-subtle);
       background: var(--bg-card);
@@ -763,6 +788,7 @@
       text-decoration: underline;
     }
 
+    /* Responsive */
     @media (max-width: 860px) {
       .projects-grid,
       .detail-columns {
@@ -832,6 +858,7 @@
   </header>
 
   <main class="container">
+    <!-- ANA GÖRÜNÜM: 2 PROJE KARTI -->
     <section id="homeView" class="view" aria-label="Mobil Uygulamalar Listesi">
       <div class="hero">
         <span class="hero-eyebrow">
@@ -848,6 +875,7 @@
       </div>
 
       <div class="projects-grid">
+        <!-- Proje 1 Kartı -->
         <article class="project-card project-card--sage" data-project="sakin-dongu" tabindex="0" role="region" aria-labelledby="card-title-sakin">
           <div class="card-top">
             <span class="app-icon app-icon--sage" aria-hidden="true">
@@ -898,6 +926,7 @@
           </div>
         </article>
 
+        <!-- Proje 2 Kartı -->
         <article class="project-card project-card--sky" data-project="saha-dolabi" tabindex="0" role="region" aria-labelledby="card-title-saha">
           <div class="card-top">
             <span class="app-icon app-icon--sky" aria-hidden="true">
@@ -947,6 +976,57 @@
             </a>
           </div>
         </article>
+
+        <!-- Proje 3 Kartı -->
+        <article class="project-card project-card--cw" data-project="cw-master" tabindex="0" role="region" aria-labelledby="card-title-cw">
+          <div class="card-top">
+            <span class="app-icon app-icon--cw" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12h3l2.5-6 3 12 2.5-6h3"></path>
+                <circle cx="19" cy="17" r="1.5"></circle>
+                <line x1="19" y1="6" x2="22" y2="6"></line>
+              </svg>
+            </span>
+            <div class="badge-row">
+              <span class="badge badge--cw">Eğitim</span>
+              <span class="badge">Amatör Telsiz CW</span>
+              <span class="badge badge--status">Google Play Hazırlık / Yayın Sürecinde</span>
+            </div>
+          </div>
+
+          <div class="card-title-wrap">
+            <h2 id="card-title-cw">CW Master: Mors Ustası</h2>
+            <code class="pkg-code">com.ta1dp.cwmaster</code>
+          </div>
+
+          <p class="card-summary">
+            Amatör telsizciler için sıfırdan 35+ WPM'e bilimsel Mors (CW) dinleme ve gönderme eğitimi.
+          </p>
+
+          <ul class="card-highlights">
+            <li>
+              <span class="dot dot--cw" aria-hidden="true"></span>
+              <span>Koch, Farnsworth, Wordsworth &amp; ICR ile sıfır görsel tablo; 8 aşamalı RX+TX müfredatı</span>
+            </li>
+            <li>
+              <span class="dot dot--cw" aria-hidden="true"></span>
+              <span>Iambic A/B/Ultimatic/Düz Maniple, USB-OTG HID/MIDI, QRN/QSB/QRM HF simülatörü</span>
+            </li>
+            <li>
+              <span class="dot dot--cw" aria-hidden="true"></span>
+              <span>%100 cihaz içi istatistik &amp; QSO seyir defteri; isteğe bağlı mikrofon yalnızca RAM'de işlenir</span>
+            </li>
+          </ul>
+
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary--cw" data-open-detail="cw-master">
+              Detayları &amp; Politikayı Gör →
+            </button>
+            <a class="btn btn-ghost" href="cw-master-privacy.html" data-direct-policy>
+              Gizlilik Politikası
+            </a>
+          </div>
+        </article>
       </div>
 
       <aside class="meta-strip" aria-label="Geliştirici ve doğrulama bilgileri">
@@ -962,6 +1042,7 @@
       </aside>
     </section>
 
+    <!-- DETAY & POLİTİKA GÖRÜNÜMÜ -->
     <section id="detailView" class="view" hidden aria-live="polite"></section>
   </main>
 
@@ -971,6 +1052,7 @@
       <div class="footer-links">
         <a href="sakin-dongu-privacy.html">Sakin Döngü Gizlilik Politikası</a>
         <a href="privacy-policy.html">Saha Dolabı Gizlilik Politikası</a>
+        <a href="cw-master-privacy.html">CW Master Gizlilik Politikası</a>
         <a href="https://ta1dp.github.io/app-ads.txt" target="_blank" rel="noopener noreferrer">app-ads.txt</a>
         <a href="mailto:sertunreklam1@gmail.com">sertunreklam1@gmail.com</a>
       </div>
@@ -1014,6 +1096,40 @@
             "POST_NOTIFICATIONS",
             "RECEIVE_BOOT_COMPLETED",
             "USE_BIOMETRIC"
+          ]
+        },
+        "cw-master": {
+          id: "cw-master",
+          theme: "cw",
+          title: "CW Master: Mors Ustası",
+          packageName: "com.ta1dp.cwmaster",
+          category: "Eğitim",
+          ageRating: "Genel / 13+ Amatör Telsiz",
+          status: "Google Play Hazırlık / Yayın Sürecinde",
+          summary: "Amatör telsizciler için sıfırdan 35+ WPM'e bilimsel Mors (CW) dinleme (RX) ve gönderme (TX) eğitim uygulaması.",
+          policyUrl: "cw-master-privacy.html",
+          policyLabel: "Tam Gizlilik Politikasını Oku",
+          otherProjectId: "sakin-dongu",
+          otherProjectLabel: "Sakin Döngü: Yumurtlama Takibi",
+          features: [
+            "Sıfırdan 35+ WPM'e 8 aşamalı RX+TX müfredatı (CWops Modern, LICW QSO-Frekans ve Klasik Koch sıraları)",
+            "Görsel nokta-çizgi tablosu olmadan doğrudan kulaktan öğrenme: Koch, Farnsworth, Wordsworth, ICR & Head Copy",
+            "Raised-Cosine 4–6 ms zarflı düşük gecikmeli CW tonu + QRN/QSB/QRM ve 50–500 Hz BPF/AGC HF bant simülasyonu",
+            "Iambic Mod A/B, Ultimatic ve Düz Maniple destekli çoklu dokunma korumalı paddle + 2 katmanlı canlı El Ayarı Koçu",
+            "USB-OTG HID (VBand/Vail), USB/BLE MIDI ve isteğe bağlı Goertzel mikrofon akustik çözücü desteği",
+            "POTA (TR-xxxx), SOTA, 4 fazlı Ragchew ve CWops CWT QSO simülatörü + cihaz içi Seyir Defteri (Logbook)"
+          ],
+          privacyPoints: [
+            "Hesap veya geliştirici sunucusu yoktur; çağrı işareti, ilerleme ve QSO seyir defteri yalnızca cihazda tutulur.",
+            "İsteğe bağlı RECORD_AUDIO mikrofon izni yalnızca kullanıcı açtığında RAM üzerinde anlık ton analizi yapar; ses kaydedilmez ve yüklenmez.",
+            "Gelen arama duraklatması READ_PHONE_STATE olmadan AudioFocusRequest ile çalışır; reklamlar için Google AdMob kullanılır."
+          ],
+          importantNotice: "Tx ekranında Bluetooth A2DP kulaklık gecikmesi algılandığında gönderim ritmini korumak için kablolu kulaklık veya cihaz hoparlörü önerilir.",
+          permissions: [
+            "INTERNET",
+            "ACCESS_NETWORK_STATE",
+            "VIBRATE",
+            "RECORD_AUDIO (İsteğe Bağlı)"
           ]
         },
         "saha-dolabi": {
@@ -1063,6 +1179,13 @@
       }
 
       function iconSvg(projectId) {
+        if (projectId === "cw-master") {
+          return '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+            '<path d="M2 12h3l2.5-6 3 12 2.5-6h3"></path>' +
+            '<circle cx="19" cy="17" r="1.5"></circle>' +
+            '<line x1="19" y1="6" x2="22" y2="6"></line>' +
+            '</svg>';
+        }
         if (projectId === "sakin-dongu") {
           return '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
             '<path d="M12 21c4.5-3.5 7-7.4 7-11.2A7 7 0 0 0 5 9.8C5 13.6 7.5 17.5 12 21Z"></path>' +
@@ -1231,6 +1354,7 @@
         }
       }
 
+      // Kart ve buton etkileşimleri
       document.querySelectorAll(".project-card").forEach(function (card) {
         var projectId = card.getAttribute("data-project");
 
