@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CW Master: Mors Ustası — Gizlilik Politikası / Privacy Policy</title>
+  <meta name="description" content="CW Master: Mors Ustası (com.ta1dp.cwmaster) Gizlilik Politikası ve Kişisel Veri Güvenliği Beyanı. Cihaz içi amatör telsiz Mors (CW) eğitim uygulaması." />
+  <link rel="canonical" href="https://ta1dp.github.io/cw-master-privacy.html" />
+  <style>
+    :root {
+      --bg-canvas: #FAFAF8;
+      --bg-card: #FFFFFF;
+      --bg-muted: #F4F6F5;
+      --border-subtle: #E8ECEA;
+      --amber-primary: #B45309;
+      --amber-container: #FEF3C7;
+      --amber-border: #FDE68A;
+      --amber-dark: #78350F;
+      --teal-container: #E0F2FE;
+      --teal-dark: #075985;
+      --emerald-container: #ECFDF5;
+      --emerald-dark: #065F46;
+      --text-primary: #1E292B;
+      --text-secondary: #52606D;
+      --text-muted: #7B8794;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .topbar {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .topbar-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #0F1822;
+      border: 1px solid #F59E0B;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .brand-title { font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; }
+    .brand-sub { font-size: 0.8rem; color: var(--text-secondary); display: block; }
+    .lang-nav { display: flex; gap: 8px; }
+    .lang-pill {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--amber-border);
+      background: var(--amber-container);
+      color: var(--amber-dark);
+    }
+    .lang-pill.secondary {
+      background: var(--bg-card);
+      border-color: var(--border-subtle);
+      color: var(--text-secondary);
+    }
+    main { max-width: 880px; margin: 0 auto; padding: 28px 20px 64px; }
+    .hero {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 1.7rem; line-height: 1.25; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .badge.amber { background: var(--amber-container); color: var(--amber-dark); }
+    .badge.teal { background: var(--teal-container); color: var(--teal-dark); }
+    .badge.emerald { background: var(--emerald-container); color: var(--emerald-dark); }
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+    .section-card h2 {
+      margin: 0 0 6px;
+      font-size: 1.45rem;
+      color: var(--amber-dark);
+      border-bottom: 2px solid var(--amber-container);
+      padding-bottom: 10px;
+    }
+    .section-card h3 { margin: 24px 0 8px; font-size: 1.08rem; color: var(--text-primary); }
+    .section-card p { margin: 0 0 12px; color: var(--text-secondary); }
+    .section-card ul { margin: 8px 0 14px; padding-left: 20px; color: var(--text-secondary); }
+    .section-card li { margin-bottom: 6px; }
+    .callout {
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin: 16px 0;
+      font-size: 0.94rem;
+    }
+    .callout.emerald {
+      background: var(--emerald-container);
+      border: 1px solid #A7F3D0;
+      color: var(--emerald-dark);
+    }
+    .callout.amber {
+      background: var(--amber-container);
+      border: 1px solid var(--amber-border);
+      color: var(--amber-dark);
+    }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.9rem; }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+      color: var(--text-secondary);
+      overflow-wrap: anywhere;
+    }
+    th { background: var(--bg-muted); color: var(--text-primary); font-weight: 600; }
+    code {
+      background: var(--bg-muted);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.86em;
+      color: var(--text-primary);
+      overflow-wrap: anywhere;
+    }
+    a { color: var(--amber-primary); }
+    footer { text-align: center; font-size: 0.85rem; color: var(--text-muted); padding-top: 12px; }
+    @media (max-width: 600px) {
+      .hero, .section-card { padding: 20px; }
+      .hero h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+            <path d="M10 28 Q16 28 20 18 T28 18 T36 28 L42 28 Q46 28 50 14" stroke="#22D3EE" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="22" cy="46" r="5" fill="#F59E0B"/>
+            <rect x="31" y="41" width="22" height="10" rx="5" fill="#F59E0B"/>
+          </svg>
+        </span>
+        <span>
+          <span class="brand-title">CW Master: Mors Ustası</span>
+          <span class="brand-sub">com.ta1dp.cwmaster • Gizlilik Politikası / Privacy Policy</span>
+        </span>
+      </a>
+      <nav class="lang-nav" aria-label="Dil Seçimi / Language Selection">
+        <a class="lang-pill" href="#tr">Türkçe</a>
+        <a class="lang-pill secondary" href="#en">English</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <h1>Gizlilik Politikası / Privacy Policy</h1>
+      <p style="margin: 0; color: var(--text-secondary);">
+        <strong>Uygulama / Application:</strong> CW Master: Mors Ustası (<code>com.ta1dp.cwmaster</code>)<br />
+        <strong>Geliştirici / Developer:</strong> Serdar Tunçel (TA1DP)<br />
+        <strong>Son Güncelleme / Last Updated:</strong> 23 Kasım 2026 / November 23, 2026
+      </p>
+      <div class="meta-row">
+        <span class="badge emerald">Çevrimdışı Eğitim / Local-First</span>
+        <span class="badge teal">Mikrofon Yalnızca Anlık RAM Çözümleme</span>
+        <span class="badge amber">Hesap &amp; Bulut Sunucusu Yok</span>
+      </div>
+    </section>
+
+    <article id="tr" class="section-card" lang="tr">
+      <h2>1. Türkçe Gizlilik Politikası</h2>
+
+      <div class="callout emerald">
+        <strong>Özet: Eğitim verileriniz ve sesiniz yalnızca cihazınızda kalır.</strong>
+        CW Master: Mors Ustası, amatör telsizciler için tasarlanmış çevrimdışı öncelikli (local-first) bir Mors (CW) dinleme ve gönderme eğitim uygulamasıdır. Hesap açma zorunluluğu yoktur; geliştiriciye ait hiçbir sunucu veya uzaktan veritabanı bulunmaz.
+      </div>
+
+      <h3>1.1. Cihazda Tutulan Yerel Veriler</h3>
+      <p>
+        Uygulama içinde oluşturduğunuz tüm eğitim ve ayar verileri yalnızca cihazınızın özel yerel uygulama alanında (<code>SharedPreferences</code>) saklanır:
+      </p>
+      <ul>
+        <li>İsteğe bağlı olarak girdiğiniz amatör telsiz çağrı işareti (ör. <code>TA1DP</code>), isim, QTH ve uygulama tercihleri (WPM hızı, yan ton frekansı, Iambic keyer modu, HF QRN/QSB/QRM seviyeleri).</li>
+        <li>Aşama ilerlemesi, karakter başarı istatistikleri, tepki süreleri, karışıklık matrisi, W1AW yeterlilik rozetleri ve simüle QSO seyir defteri (logbook) kayıtları.</li>
+        <li>Geliştirici bu verilere erişemez, toplamaz ve üçüncü taraflarla paylaşmaz.</li>
+      </ul>
+
+      <h3>1.2. Mikrofon (`RECORD_AUDIO`) ve Harici Donanım Kullanımı</h3>
+      <ul>
+        <li><strong>İsteğe Bağlı Akustik Mikrofon Çözücü:</strong> <code>RECORD_AUDIO</code> izni yalnızca Gönderim (TX) ekranında harici bir telsiz veya pratik osilatör sesini dinleyip ekranda Mors kodu çözmek için kullanıcı tarafından manuel olarak "Mikrofon" düğmesine basıldığında istenir.</li>
+        <li>Ses örnekleri gerçek zamanlı olarak cihaz belleğinde (RAM) Goertzel ton algılayıcısı ile işlenir ve anında atılır; <strong>hiçbir ses kaydı alınmaz, diske yazılmaz veya internete gönderilmez</strong>.</li>
+        <li><strong>USB-OTG HID / MIDI &amp; Ses Çıkışı Kontrolü:</strong> Harici manipleler (VBand/Vail USB adaptörleri, MIDI keyerlar) ve Bluetooth A2DP gecikme uyarısı (<code>AudioDeviceCallback</code>) yalnızca cihaz üzerinde anlık girdi/çıkış yönlendirmesi için kullanılır.</li>
+        <li><strong>Gelen Arama Duraklatması:</strong> Uygulama gelen telefon aramalarında sesi duraklatmak için gizlilik dostu Android <code>AudioFocusRequest</code> mekanizmasını kullanır; <code>READ_PHONE_STATE</code> izni talep etmez.</li>
+      </ul>
+
+      <h3>1.3. Reklamlar: Google AdMob &amp; Reklam Kimliği (<code>AD_ID</code>)</h3>
+      <p>
+        CW Master: Mors Ustası, uygulamanın ücretsiz sunulabilmesi için <strong>Google AdMob</strong> (<code>com.google.android.gms:play-services-ads</code>) SDK'sını kullanır. Reklamlar yalnızca Ana Sayfa, Müfredat, Seyir Defteri ve Ayarlar ekranlarında gösterilir; aktif Dinleme (RX), Gönderme (TX) paddle alanı ve QSO ekranlarında banner reklam gizlenir.
+      </p>
+      <p>
+        Google Mobile Ads SDK'sı, reklam sunumu, sıklık sınırlaması, performans ölçümü ve geçersiz trafik/sahtecilik önleme amacıyla aşağıdaki teknik verileri toplayabilir ve işleyebilir:
+      </p>
+      <ul>
+        <li>Android Reklam Kimliği (<code>AD_ID</code>) ve cihaz/uygulama tanımlayıcıları</li>
+        <li>IP adresinden türetilen kaba konum (ülke/şehir düzeyi)</li>
+        <li>Reklam gösterim/tıklama etkileşimleri ve SDK çökme/tanılama günlükleri</li>
+      </ul>
+      <p>
+        Düz metin ağ trafiği kapalıdır (<code>android:usesCleartextTraffic="false"</code>) ve tüm reklam iletişimi HTTPS üzerinden şifrelenir. Android cihazınızda <strong>Ayarlar → Gizlilik → Reklamlar</strong> menüsünden Reklam Kimliğinizi sıfırlayabilir veya silebilirsiniz. Detaylar için <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Gizlilik Politikası</a> sayfasını inceleyebilirsiniz.
+      </p>
+
+      <h3>1.4. Uygulama İzinleri</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>İzin</th><th>Kullanım Amacı</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>INTERNET</code> &amp; <code>ACCESS_NETWORK_STATE</code></td>
+            <td>Yalnızca Google AdMob reklamlarını yüklemek ve ağ bağlantısını kontrol etmek için kullanılır. Eğitim ve QSO kayıtları internete gönderilmez.</td>
+          </tr>
+          <tr>
+            <td><code>RECORD_AUDIO</code></td>
+            <td>İsteğe bağlıdır. Yalnızca kullanıcı TX ekranında "Mikrofon" modunu açtığında harici Mors sesini anlık çözmek için kullanılır; ses kaydedilmez veya yüklenmez.</td>
+          </tr>
+          <tr>
+            <td><code>VIBRATE</code></td>
+            <td>Dokunmatik maniple/paddle basışlarında dokunsal geri bildirim (haptic) sağlamak için kullanılır.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>1.5. Veri Silme &amp; Haklarınız (KVKK / GDPR)</h3>
+      <p>
+        6698 sayılı KVKK ve AB GDPR kapsamında verileriniz doğrudan kendi cihazınızdadır:
+      </p>
+      <ul>
+        <li><strong>Uygulama İçi Sıfırlama:</strong> <strong>Ayarlar → Tüm İlerlemeyi Sıfırla</strong> ve <strong>Seyir Defteri → Temizle</strong> seçenekleriyle tüm yerel istatistiklerinizi ve QSO kayıtlarınızı anında silebilirsiniz.</li>
+        <li><strong>Kalıcı Silme:</strong> Uygulamayı cihazınızdan kaldırmanız tüm yerel uygulama verilerini kalıcı olarak siler.</li>
+      </ul>
+
+      <h3>1.6. Çocukların Gizliliği</h3>
+      <p>
+        Uygulama genel amatör telsiz eğitimi içindir (13+ yaş ve yetişkin telsiz operatörleri hedeflenir) ve 13 yaş altı çocuklardan bilerek kişisel veri toplamaz.
+      </p>
+
+      <h3>1.7. İletişim</h3>
+      <p>
+        Gizlilik ve destek talepleri için:<br />
+        <strong>E-posta:</strong> <a href="mailto:sertunreklam1@gmail.com">sertunreklam1@gmail.com</a><br />
+        <strong>Geliştirici Web Sitesi:</strong> <a href="https://ta1dp.github.io" target="_blank" rel="noopener noreferrer">https://ta1dp.github.io</a><br />
+        <strong>Politika Adresi:</strong> <a href="https://ta1dp.github.io/cw-master-privacy.html">https://ta1dp.github.io/cw-master-privacy.html</a>
+      </p>
+    </article>
+
+    <article id="en" class="section-card" lang="en">
+      <h2>2. English Privacy Policy</h2>
+
+      <div class="callout emerald">
+        <strong>Summary: Your training logs and audio stay strictly on your device.</strong>
+        CW Master: Mors Ustası is an offline-first amateur radio Morse code (CW) training app. No account is required, and we operate no backend servers or cloud databases.
+      </div>
+
+      <h3>2.1. On-Device Local Data</h3>
+      <p>
+        Your optional operator callsign, name, QTH, audio/keyer preferences, Koch/curriculum stage progress, character latency stats, W1AW badges, and simulated QSO logbook entries are stored locally in Android's private app storage (<code>SharedPreferences</code>). None of this training data is transmitted to the developer.
+      </p>
+
+      <h3>2.2. Optional Microphone (`RECORD_AUDIO`) &amp; External Hardware</h3>
+      <ul>
+        <li><strong>Acoustic CW Decoder (Optional):</strong> <code>RECORD_AUDIO</code> permission is requested only if you explicitly toggle the Microphone decoder in the TX screen to decode tones from an external keyer oscillator or radio speaker. Audio buffers are processed in real time in RAM using the Goertzel algorithm and discarded immediately—<strong>audio is never recorded, saved, or uploaded</strong>.</li>
+        <li><strong>External Paddles &amp; Audio Routing:</strong> USB-OTG HID/MIDI paddle events and Bluetooth A2DP latency detection (<code>AudioDeviceCallback</code>) run strictly locally.</li>
+        <li><strong>Call Interruption:</strong> Uses privacy-preserving <code>AudioFocusRequest</code> to pause audio during calls—<code>READ_PHONE_STATE</code> is never requested.</li>
+      </ul>
+
+      <h3>2.3. Advertising: Google AdMob &amp; Advertising ID (<code>AD_ID</code>)</h3>
+      <p>
+        CW Master integrates <strong>Google AdMob</strong> (<code>com.google.android.gms:play-services-ads</code>) to display banner ads on non-drill navigation screens (Home, Curriculum, Logbook, Settings) and frequency-capped skippable interstitial / optional rewarded ads. Banner ads are hidden on active RX, TX paddle, and QSO screens.
+      </p>
+      <p>
+        The Google Mobile Ads SDK may collect and process:
+      </p>
+      <ul>
+        <li>Android Advertising ID (<code>AD_ID</code>) and device/app identifiers</li>
+        <li>Coarse IP-derived location</li>
+        <li>Ad impression/click interactions and SDK crash/diagnostics telemetry</li>
+      </ul>
+      <p>
+        Cleartext HTTP traffic is disabled (<code>android:usesCleartextTraffic="false"</code>). You can reset or delete your Advertising ID anytime in <strong>Android Settings → Privacy → Ads</strong>. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.
+      </p>
+
+      <h3>2.4. Data Deletion &amp; Contact</h3>
+      <p>
+        You can reset all local progress in <strong>Settings → Reset All Progress</strong> or uninstall the app to remove all local data.<br />
+        <strong>Contact Email:</strong> <a href="mailto:sertunreklam1@gmail.com">sertunreklam1@gmail.com</a><br />
+        <strong>Developer Website:</strong> <a href="https://ta1dp.github.io" target="_blank" rel="noopener noreferrer">https://ta1dp.github.io</a>
+      </p>
+    </article>
+
+    <footer>
+      CW Master: Mors Ustası (<code>com.ta1dp.cwmaster</code>) • Amateur Radio CW Trainer •
+      <a href="https://ta1dp.github.io" target="_blank" rel="noopener noreferrer">ta1dp.github.io</a>
+    </footer>
+  </main>
+</body>
+</html>
